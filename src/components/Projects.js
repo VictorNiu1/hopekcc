@@ -1,4 +1,6 @@
+// Projects.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Projects.css';
 import robotImage from '../assets/25231.png'; // Corrected path
 
@@ -6,12 +8,12 @@ const initialProjects = [
   {
     name: 'Project 1',
     description: 'Github Link/Description',
-    image: robotImage, 
+    image: robotImage,
   },
   {
     name: 'Project 2',
     description: 'Github Link/Description',
-    image: robotImage, 
+    image: robotImage,
   },
   {
     name: 'Project 3',
@@ -59,12 +61,13 @@ const Projects = () => {
         {projects.map((project, index) => (
           <li key={index} className="project-item">
             <img src={project.image} alt={`${project.name} image`} className="project-image" />
-            <h3>{project.name}</h3>
+            <Link to={`/projects/${project.name}`}>
+              <h3>{project.name}</h3>
+            </Link>
             <p>{project.description}</p>
           </li>
         ))}
       </ul>
-
     </div>
   );
 };

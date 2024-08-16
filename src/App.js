@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom'; // Add useLocation here
 import './App.css';
 import backgroundImage from './assets/background.jpg';
 import overlayImage from './assets/robot.png';
@@ -7,6 +7,7 @@ import overlayImage from './assets/robot.png';
 import Home from './components/Home';
 import Login from './components/Login';
 import Projects from './components/Projects';
+import ProjectDetail from './components/ProjectDetail'; // Import the new component
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/Home" element={<Home />} />
             <Route path="/Projects" element={<Projects />} />
             <Route path="/Login" element={<Login />} />
+            <Route path="/projects/:projectName" element={<ProjectDetail />} /> {/* Add this route */}
           </Routes>
           <OverlayImage />
         </main>
@@ -40,7 +42,10 @@ function App() {
 
 function OverlayImage() {
   const location = useLocation();
-  const hideOverlay = location.pathname === '/Login' || location.pathname === '/Projects';
+  const hideOverlay = location.pathname === '/Login' || 
+  location.pathname === '/Projects' || 
+  location.pathname.startsWith('/projects/'); // Hide on project detail pages
+
 
   if (hideOverlay) {
     return null;
@@ -50,4 +55,3 @@ function OverlayImage() {
 }
 
 export default App;
- 
